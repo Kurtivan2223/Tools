@@ -1,0 +1,15 @@
+﻿<Window x:Class="DragonNest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DragonNest"
+        mc:Ignorable="d"
+        Title="Dragon Nest Tool" Height="201.366" Width="350.945" ResizeMode="NoResize" Icon="3.ico">
+    <Grid>
+        <Button Content="Start" HorizontalAlignment="Left" Margin="97,37,0,0" VerticalAlignment="Top" Width="151"/>
+        <Button Content="Edit Connection String" HorizontalAlignment="Left" Margin="97,78,0,0" VerticalAlignment="Top" Width="151"/>
+        <Button Content="Exit" HorizontalAlignment="Left" Margin="97,121,0,0" VerticalAlignment="Top" Width="151" Click="Button_Click"/>
+
+    </Grid>
+</Window>
