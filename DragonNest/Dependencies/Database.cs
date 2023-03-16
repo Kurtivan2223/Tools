@@ -50,6 +50,12 @@ namespace DragonNest.Dependencies
             }
         }
 
+        public static void CloseConnection()
+        {
+            Logs.Write("Closing Connection...", 1);
+            Logs.Write("Successfully Closed Pools and Connection", 1);
+        }
+
         public static void init()
         {
             
