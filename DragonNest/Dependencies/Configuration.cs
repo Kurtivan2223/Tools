@@ -10,53 +10,22 @@ namespace DragonNest.Dependencies
 {
     class Configuration
     {
-        /*
-            @Initialize with default
-            @Create Ini file if doesnt exists
-         */
-
-        protected struct Default
-        {
-            public static string Host { get; set; }
-
-            public static int Port { get; set; }
-
-            public static string Username { get; set; }
-
-            public static string Password { get; set; }
-
-            public static string DatabaseName { get; set; }
-        }
-
-        
-
         public static void CreateIni()
         {
             try
             {
-                if(!Tools.Exists(@"Config"))
+                if(!Tools.DExists(@"Config"))
                 {
                     Directory.CreateDirectory("Config");
                 }
 
-                Default.Host = "127.0.0.1";
-
-                Default.Port = 1433;
-
-                Default.Username = "sa";
-
-                Default.Password = "1234";
-
-                Default.DatabaseName = "DNMembership";
-
-
                 var ini = new Ini(@"Config\\Settings.ini");
 
-                ini.Write("HOST", Default.Host);
-                ini.Write("PORT", Default.Port.ToString());
-                ini.Write("USERNAME", Default.Username);
-                ini.Write("PASSWORD", Default.Password);
-                ini.Write("DATABASE", Default.DatabaseName);
+                ini.Write("HOST", "127.0.0.1");
+                ini.Write("PORT", "1433");
+                ini.Write("USERNAME", "sa");
+                ini.Write("PASSWORD", "1234");
+                ini.Write("DATABASE", "DNMembership");
             }
             catch(Exception ex)
             {
@@ -73,22 +42,13 @@ namespace DragonNest.Dependencies
             {
                 var ini = new Ini(@"Config\\Settings.ini");
 
-                //check if Directory Exists
-                if (Tools.Exists(@"Config\\Settings.ini"))
+                if (Tools.FExists(@"Config\\Settings.ini"))
                 {
-                    try
-                    {
-                        Database.Config.Host = ini.Read("HOST");
-                        Database.Config.Port = Convert.ToInt32(ini.Read("PORT"));
-                        Database.Config.Username = ini.Read("USERNAME");
-                        Database.Config.Password = ini.Read("PASSWORD");
-                        Database.Config.DatabaseName = ini.Read("DATABASE");
-                    }
-                    catch(Exception ex)
-                    {
-                        MessageBox.Show("Please Read Logs for more Information", "Configuration", MessageBoxButton.OK, MessageBoxImage.Warning);
-                        Logs.Write(ex.ToString(), 2);
-                    }
+                    Database.Config.Host = ini.Read("HOST");
+                    Database.Config.Port = Convert.ToInt32(ini.Read("PORT"));
+                    Database.Config.Username = ini.Read("USERNAME");
+                    Database.Config.Password = ini.Read("PASSWORD");
+                    Database.Config.DatabaseName = ini.Read("DATABASE");
                 }
                 else
                 {

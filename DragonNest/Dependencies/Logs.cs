@@ -18,7 +18,7 @@ namespace DragonNest.Dependencies
         {
             string timestamp = GetTimeStamp(DateTime.Now);
 
-            if(!Tools.Exists(@"Logs"))
+            if(!Tools.DExists(@"Logs"))
             {
                 Directory.CreateDirectory("Logs");
             }

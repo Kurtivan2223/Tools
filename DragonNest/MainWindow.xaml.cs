@@ -30,7 +30,7 @@ namespace DragonNest
 
         private void Init()
         {
-            if(!File.Exists(@"Config\\Settings.ini"))
+            if(!Tools.FExists(@"Config\\Settings.ini"))
             {
                 Logs.Write("Setting Up Configs!", 1);
                 Configuration.CreateIni();

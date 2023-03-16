@@ -9,9 +9,14 @@ namespace DragonNest.Dependencies
 {
     class Tools
     {
-        public static bool Exists(string Path)
+        public static bool DExists(string Path)
         {
             return Directory.Exists(Path) ? true : false;
+        }
+
+        public static bool FExists(string file)
+        {
+            return File.Exists(file) ? true : false;
         }
     }
 }
