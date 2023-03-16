@@ -18,11 +18,6 @@ namespace DragonNest.Dependencies
         {
             string timestamp = GetTimeStamp(DateTime.Now);
 
-            if(!Tools.DExists(@"Logs"))
-            {
-                Directory.CreateDirectory("Logs");
-            }
-
             switch (code)
             {
                 case 1:

@@ -14,11 +14,6 @@ namespace DragonNest.Dependencies
         {
             try
             {
-                if(!Tools.DExists(@"Config"))
-                {
-                    Directory.CreateDirectory("Config");
-                }
-
                 var ini = new Ini(@"Config\\Settings.ini");
 
                 ini.Write("HOST", "127.0.0.1");

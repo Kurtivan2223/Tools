@@ -30,7 +30,17 @@ namespace DragonNest
 
         private void Init()
         {
-            if(!Tools.FExists(@"Config\\Settings.ini"))
+            if (!Tools.DExists(@"Logs"))
+            {
+                Directory.CreateDirectory("Logs");
+            }
+
+            if (!Tools.DExists(@"Config"))
+            {
+                Directory.CreateDirectory("Config");
+            }
+
+            if (!Tools.FExists(@"Config\\Settings.ini"))
             {
                 Logs.Write("Setting Up Configs!", 1);
                 Configuration.CreateIni();
