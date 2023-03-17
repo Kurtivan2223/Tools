@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Diagnostics;
 
 namespace DragonNest.Dependencies
 {
@@ -28,9 +29,12 @@ namespace DragonNest.Dependencies
 
         protected static SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
 
+        public static SqlConnection Connection = new SqlConnection(builder.ConnectionString);
+
         public static void Build()
         {
             Configuration.ReadIni();
+            Tools.sw = Stopwatch.StartNew();
 
             try
             {
@@ -42,23 +46,55 @@ namespace DragonNest.Dependencies
 
                 Logs.Write("Building Connection String", 1);
                 Logs.Write(builder.ConnectionString, 1);
+
+                Tools.sw.Stop();
+
+                Logs.Write("Done Constructing Connection String at " + Tools.sw.ElapsedMilliseconds + "ms", 1);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Please Read Logs for more Information", "Notice!", MessageBoxButton.OK, MessageBoxImage.Warning);
-                Logs.Write(ex.ToString(), 2);
+                Logs.Write(ex.Message.ToString(), 2);
+                Environment.Exit(-1);
             }
+        }
+
+        public static void Connect()
+        {
+            Logs.Write("Connecting to Database...", 1);
+
+            Tools.sw = Stopwatch.StartNew();
+
+            try
+            {
+                if(Connection.State == ConnectionState.Open)
+                    Connection.Open();
+                Logs.Write("Starting Pooling.....", 1);
+                Logs.Write("Connected to the Database at " + Tools.sw.ElapsedMilliseconds + "ms", 1);
+            }
+            catch(Exception ex)
+            {
+                Logs.Write(ex.Message.ToString(), 2);
+                Environment.Exit(-1);
+            }
+
+            Tools.sw.Stop();
         }
 
         public static void CloseConnection()
         {
-            Logs.Write("Closing Connection...", 1);
-            Logs.Write("Successfully Closed Pools and Connection", 1);
-        }
+            Tools.sw = Stopwatch.StartNew();
+            Tools.sw.Stop();
 
-        public static void init()
-        {
-            
+            try
+            {
+                Connection.Close();
+                Logs.Write("Closing Connection...", 1);
+                Logs.Write("Successfully Closed Pools and Connection at " + Tools.sw.ElapsedMilliseconds + "ms", 1);
+            }
+            catch (Exception ex)
+            {
+                Logs.Write(ex.Message.ToString(), 2);
+            }
         }
     }
 }

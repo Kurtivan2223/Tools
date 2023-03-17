@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using DragonNest.Dependencies;
+using System.Diagnostics;
 
 namespace DragonNest
 {
@@ -45,12 +46,26 @@ namespace DragonNest
                 Logs.Write("Setting Up Configs!", 1);
                 Configuration.CreateIni();
             }
+
+            Configuration.ReadIni();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Logs.Write("Program Exit", 1);
             Environment.Exit(0);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Database.Build();
+            Database.Connect();
+
+            Control control = new Control();
+
+            control.Show();
+
+            this.Close();
         }
     }
 }

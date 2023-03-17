@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
 
 namespace DragonNest.Dependencies
 {
     class Tools
     {
+        public static Stopwatch sw = new Stopwatch();
+
         public static bool DExists(string Path)
         {
             return Directory.Exists(Path) ? true : false;

@@ -21,7 +21,6 @@ namespace DragonNest.Dependencies
         {
             Path = new FileInfo(IniPath ?? Exe + ".ini").FullName;
         }
-
         public string Read(string Key, string Section = null)
         {
             var RetVal = new StringBuilder(255);
@@ -33,6 +32,7 @@ namespace DragonNest.Dependencies
         {
             WritePrivateProfileString(Section ?? Exe, Key, Value, Path);
         }
+        
 
         public void DeleteKey(string Key, string Section = null)
         {
